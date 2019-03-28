@@ -1,0 +1,60 @@
+version: '2.2'
+networks: 
+  wk-docker-cluster:
+    external: true
+services: 
+  elasticsearch1:
+    image: elasticsearch:2.4.6
+    container_name: elasticsearch1
+    # environment: 
+    #   - cluster.name=docker-cluster
+    volumes: 
+      - /data/projects/my_projects/dockerfile/elasticsearch/elasticsearch-1.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports: 
+      - 9201:9200
+    networks: 
+      wk-docker-cluster:
+        ipv4_address: 192.168.0.11
+        aliases: 
+          - es1
+  elasticsearch2:
+    image: elasticsearch:2.4.6
+    container_name: elasticsearch2
+    volumes: 
+      - /data/projects/my_projects/dockerfile/elasticsearch/elasticsearch-2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports: 
+      - 9202:9200
+    links: 
+      - elasticsearch1:elasticsearch
+    networks: 
+      wk-docker-cluster:
+        ipv4_address: 192.168.0.12
+        aliases: 
+         - es2
+  elasticsearch3:
+    image: elasticsearch:2.4.6
+    container_name: elasticsearch3
+    volumes: 
+      - /data/projects/my_projects/dockerfile/elasticsearch/elasticsearch-3.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports: 
+      - 9203:9200
+    links: 
+      - elasticsearch2:elasticsearch
+    networks: 
+      wk-docker-cluster:
+        ipv4_address: 192.168.0.13
+        aliases: 
+         - es3
+  

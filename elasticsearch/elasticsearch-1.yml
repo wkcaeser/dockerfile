@@ -1,0 +1,12 @@
+network.bind_host: 0.0.0.0
+cluster.name: docker-cluster
+cluster.routing.allocation.disk.threshold_enabled: false
+node.name: ${HOSTNAME}
+node.master: true
+node.data: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+network.host: 0.0.0.0
+discovery.zen.minimum_master_nodes: 2
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["192.168.0.11:9300","192.168.0.12:9300","192.168.0.13:9300"]
