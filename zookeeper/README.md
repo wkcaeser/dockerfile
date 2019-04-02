@@ -1,6 +1,6 @@
-# dockerfile
+# zookeeper cluster build docker-compose
 
-docker-compose.yml用来构建zookeeper集群  
+docker-compose.yml用来构建es集群  
 此集群3个节点  
 采用自定义网络  
 网络创建命令：
