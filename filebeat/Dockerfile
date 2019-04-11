@@ -1,11 +1,8 @@
 # Dockerfile for Filebeat
 
-# Build with:
-# docker build -t "wkcaeser/filebeat:6.4.2" .
-
 # Alpine OS 3.4
 # http://dl-cdn.alpinelinux.org/alpine/v3.4/community/x86_64/
-FROM alpine:3.4
+FROM wkcaeser/centos:v2
 
 LABEL maintainer="wkCaeser" \
         email="wkCaeser@gmail.com" \
@@ -19,4 +16,8 @@ RUN \
  && rm -rf filebeat-${FILEBEAT_VERSION}-linux-x86_64.tar.gz 
 
 
-ENTRYPOINT ["/docker-entrypoint.sh", "-c", "/filebeat.yml"]
+ENTRYPOINT ["/filebeat", "-c", "/filebeat.yml"]
+
+# docker build -t "wkcaeser/filebeat:6.4.2" .
+# docker run --rm -it -v filebeat.yml:/filebeat.yml --net=wk-docker-cluster --ip=192.168.0.11 wkcaeser/filebeat:6.4.2
+# docker run --rm -it -v /data/projects/my_projects/dockerfile/filebeat/filebeat.yml:/filebeat.yml  -v ~/Desktop/logs:/data/var/log --net=wk-docker-cluster --ip=192.168.0.11 wkcaeser/filebeat:6.4.2
