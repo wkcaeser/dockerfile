@@ -1,4 +1,5 @@
 FROM wkcaeser/centos:v2
+
 LABEL maintainer="wkCaeser" \
         email="wkCaeser@gmail.com" \
         description="nginx proxies tcp"
@@ -11,10 +12,12 @@ RUN \
     && make && make install \
 #     && rm -f /usr/local/nginx/conf/nginx.conf \
     && rm -rf /data/soft \
-    && rm -rf /usr/local/nginx-1.14.2
-
+    && rm -rf /usr/local/nginx-1.14.2 \
+    
 ADD nginx.conf /usr/local/nginx/conf/
 
 EXPOSE 80
 
 ENTRYPOINT [ "/usr/local/nginx/sbin/nginx", "-g", "daemon off;" ]
+
+# docker build -t wkcaeser/nginx-tcp .
