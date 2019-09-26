@@ -12,7 +12,7 @@ useradd nginx -g nginx -s /bin/nologin -M
 ``` shell
 mkdir -pv /data/soft && cd /data/soft && wget http://nginx.org/download/nginx-1.14.2.tar.gz
 tar -zxvf ./nginx-1.14.2.tar.gz -C /usr/local/ && cd /usr/local/nginx-1.14.2
-./configure --prefix=/usr/local/nginx  --user=nginx  --group=nginx   --with-stream --without-http_rewrite_module --without-http_gzip_module && make && make install
+./configure --prefix=/usr/local/nginx_tcp  --user=nginx  --group=nginx   --with-stream --without-http_rewrite_module --without-http_gzip_module && make && make install
 ```
 
 ## 配置文件
